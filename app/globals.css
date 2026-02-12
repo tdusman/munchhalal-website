@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #F97316;
+  --color-primary-dark: #EA6C0A;
+  --color-bg: #09090B;
+  --color-surface: #111113;
+  --color-surface2: #18181B;
+  --color-border: #27272A;
+  --color-text: #FAFAFA;
+  --color-muted: #A1A1AA;
+  --color-green: #22C55E;
+  --color-gold: #F59E0B;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: var(--color-surface) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--color-surface2) !important;
+  color: var(--color-text) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+.leaflet-popup-tip {
+  background: var(--color-surface2) !important;
+}
+.leaflet-popup-close-button {
+  color: var(--color-muted) !important;
+}
+
+/* Opacity helper for staggered animations */
+.opacity-0-initial {
+  opacity: 0;
+}
+
+/* Active button press */
+.btn-press:active {
+  transform: scale(0.98);
+}
