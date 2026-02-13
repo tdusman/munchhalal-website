@@ -1,53 +1,60 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import dynamic from 'next/dynamic';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import RestaurantCard from '@/components/restaurant/RestaurantCard';
-import RestaurantCardSkeleton from '@/components/restaurant/RestaurantCardSkeleton';
-import SearchFilters from '@/components/common/SearchFilters';
-import ViewToggle from '@/components/common/ViewToggle';
-import AdSlot from '@/components/common/AdSlot';
-import { getRestaurants } from '@/lib/storage';
-import { calculateDistance, cityCoordinates } from '@/lib/utils';
-import { Restaurant } from '@/types';
-import { SlidersHorizontal, X } from 'lucide-react';
+import { useState, useEffect, useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import RestaurantCard from "@/components/restaurant/RestaurantCard";
+import RestaurantCardSkeleton from "@/components/restaurant/RestaurantCardSkeleton";
+import SearchFilters from "@/components/common/SearchFilters";
+import ViewToggle from "@/components/common/ViewToggle";
+import AdSlot from "@/components/common/AdSlot";
+import { getRestaurants } from "@/lib/storage";
+import { calculateDistance, cityCoordinates } from "@/lib/utils";
+import { Restaurant } from "@/types";
+import { SlidersHorizontal } from "lucide-react";
 
-const RestaurantMap = dynamic(() => import('@/components/restaurant/RestaurantMap'), {
-  ssr: false,
-  loading: () => <div className="h-[500px] bg-surface2 rounded-xl animate-pulse" />,
-});
+const RestaurantMap = dynamic(
+  () => import("@/components/restaurant/RestaurantMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[500px] bg-surface2 rounded-xl animate-pulse" />
+    ),
+  },
+);
 
 function RestaurantsContent() {
   const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
   const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]);
-  const [view, setView] = useState<'list' | 'map'>('list');
-  const [sortBy, setSortBy] = useState('featured');
+  const [view, setView] = useState<"list" | "map">("list");
+  const [sortBy, setSortBy] = useState("featured");
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Filter states
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
-  const [cityQuery, setCityQuery] = useState(searchParams.get('city') || '');
-  const [radius, setRadius] = useState(searchParams.get('radius') || '');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+  const [cityQuery, setCityQuery] = useState(searchParams.get("city") || "");
+  const [radius, setRadius] = useState(searchParams.get("radius") || "");
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    searchParams.get('category') ? [searchParams.get('category')!] : []
+    searchParams.get("category") ? [searchParams.get("category")!] : [],
   );
   const [priceFilter, setPriceFilter] = useState<string[]>([]);
-  const [certFilter, setCertFilter] = useState('');
-  const [ratingFilter, setRatingFilter] = useState('');
+  const [certFilter, setCertFilter] = useState("");
+  const [ratingFilter, setRatingFilter] = useState("");
 
   useEffect(() => {
     setMounted(true);
-    const rests = getRestaurants().filter((r) => !r.isHidden && r.status === 'active');
+    const rests = getRestaurants().filter(
+      (r) => !r.isHidden && r.status === "active",
+    );
     setAllRestaurants(rests);
   }, []);
 
   const categories = useMemo(
     () => [...new Set(allRestaurants.map((r) => r.category))].sort(),
-    [allRestaurants]
+    [allRestaurants],
   );
 
   const filteredRestaurants = useMemo(() => {
@@ -59,7 +66,7 @@ function RestaurantsContent() {
         (r) =>
           r.name.toLowerCase().includes(q) ||
           r.cuisineType.toLowerCase().includes(q) ||
-          r.category.toLowerCase().includes(q)
+          r.category.toLowerCase().includes(q),
       );
     }
 
@@ -74,7 +81,9 @@ function RestaurantsContent() {
       if (cityCoord) {
         const maxDist = parseFloat(radius);
         results = results.filter(
-          (r) => calculateDistance(cityCoord.lat, cityCoord.lng, r.lat, r.lng) <= maxDist
+          (r) =>
+            calculateDistance(cityCoord.lat, cityCoord.lng, r.lat, r.lng) <=
+            maxDist,
         );
       }
     }
@@ -101,12 +110,13 @@ function RestaurantsContent() {
     const nonFeatured = results.filter((r) => !r.isFeatured);
 
     switch (sortBy) {
-      case 'rating':
+      case "rating":
         nonFeatured.sort((a, b) => b.avgRating - a.avgRating);
         break;
-      case 'newest':
+      case "newest":
         nonFeatured.sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
         break;
       default:
@@ -115,16 +125,26 @@ function RestaurantsContent() {
 
     // Featured always first
     return [...featured, ...nonFeatured];
-  }, [allRestaurants, searchQuery, cityQuery, radius, selectedCategories, priceFilter, certFilter, ratingFilter, sortBy]);
+  }, [
+    allRestaurants,
+    searchQuery,
+    cityQuery,
+    radius,
+    selectedCategories,
+    priceFilter,
+    certFilter,
+    ratingFilter,
+    sortBy,
+  ]);
 
   const clearAll = () => {
-    setSearchQuery('');
-    setCityQuery('');
-    setRadius('');
+    setSearchQuery("");
+    setCityQuery("");
+    setRadius("");
     setSelectedCategories([]);
     setPriceFilter([]);
-    setCertFilter('');
-    setRatingFilter('');
+    setCertFilter("");
+    setRatingFilter("");
   };
 
   return (
@@ -136,7 +156,9 @@ function RestaurantsContent() {
           <h1 className="text-3xl lg:text-4xl font-bold font-heading tracking-tight mb-2">
             Halal Restaurants
           </h1>
-          <p className="text-muted">Discover certified halal restaurants across Canada</p>
+          <p className="text-muted">
+            Discover certified halal restaurants across Canada
+          </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -150,7 +172,9 @@ function RestaurantsContent() {
           </button>
 
           {/* Sidebar Filters */}
-          <aside className={`lg:w-[280px] flex-shrink-0 ${filtersOpen ? 'block' : 'hidden lg:block'}`}>
+          <aside
+            className={`lg:w-[280px] flex-shrink-0 ${filtersOpen ? "block" : "hidden lg:block"}`}
+          >
             <div className="bg-surface border border-border rounded-2xl p-5 sticky top-24">
               <SearchFilters
                 searchQuery={searchQuery}
@@ -183,7 +207,11 @@ function RestaurantsContent() {
             {/* Controls */}
             <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
               <p className="text-sm text-muted">
-                Showing <span className="font-semibold text-text">{filteredRestaurants.length}</span> halal restaurant{filteredRestaurants.length !== 1 ? 's' : ''}
+                Showing{" "}
+                <span className="font-semibold text-text">
+                  {filteredRestaurants.length}
+                </span>{" "}
+                halal restaurant{filteredRestaurants.length !== 1 ? "s" : ""}
               </p>
               <div className="flex items-center gap-3">
                 <select
@@ -205,17 +233,25 @@ function RestaurantsContent() {
                   <RestaurantCardSkeleton key={i} variant="horizontal" />
                 ))}
               </div>
-            ) : view === 'list' ? (
+            ) : view === "list" ? (
               filteredRestaurants.length === 0 ? (
                 <div className="text-center py-20">
                   <p className="text-4xl mb-4">🔍</p>
-                  <h3 className="text-xl font-semibold font-heading mb-2">No halal restaurants found</h3>
-                  <p className="text-muted">Try expanding your search radius or adjusting your filters.</p>
+                  <h3 className="text-xl font-semibold font-heading mb-2">
+                    No halal restaurants found
+                  </h3>
+                  <p className="text-muted">
+                    Try expanding your search radius or adjusting your filters.
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {filteredRestaurants.map((r) => (
-                    <RestaurantCard key={r.id} restaurant={r} variant="horizontal" />
+                    <RestaurantCard
+                      key={r.id}
+                      restaurant={r}
+                      variant="horizontal"
+                    />
                   ))}
                 </div>
               )

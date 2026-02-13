@@ -1,29 +1,28 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import HeroSearch from '@/components/home/HeroSearch';
-import CategoryPills from '@/components/home/CategoryPills';
-import FeaturedSection from '@/components/home/FeaturedSection';
-import AdBanner from '@/components/home/AdBanner';
-import NewsletterSignup from '@/components/home/NewsletterSignup';
-import RestaurantCard from '@/components/restaurant/RestaurantCard';
-import StarRating from '@/components/restaurant/StarRating';
-import { getRestaurants } from '@/lib/storage';
-import { Restaurant } from '@/types';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import HeroSearch from "@/components/home/HeroSearch";
+import CategoryPills from "@/components/home/CategoryPills";
+import FeaturedSection from "@/components/home/FeaturedSection";
+import AdBanner from "@/components/home/AdBanner";
+import NewsletterSignup from "@/components/home/NewsletterSignup";
+import StarRating from "@/components/restaurant/StarRating";
+import { getRestaurants } from "@/lib/storage";
+import { Restaurant } from "@/types";
 
 const categoryIcons: Record<string, string> = {
-  Pakistani: '🥩',
-  Lebanese: '🌯',
-  Indian: '🍛',
-  Somali: '🥘',
-  Turkish: '🍖',
-  'Middle Eastern': '🧆',
-  Afghan: '🫓',
-  Bangladeshi: '🍚',
+  Pakistani: "🥩",
+  Lebanese: "🌯",
+  Indian: "🍛",
+  Somali: "🥘",
+  Turkish: "🍖",
+  "Middle Eastern": "🧆",
+  Afghan: "🫓",
+  Bangladeshi: "🍚",
 };
 
 export default function HomePage() {
@@ -32,7 +31,9 @@ export default function HomePage() {
 
   useEffect(() => {
     setMounted(true);
-    setRestaurants(getRestaurants().filter((r) => !r.isHidden && r.status === 'active'));
+    setRestaurants(
+      getRestaurants().filter((r) => !r.isHidden && r.status === "active"),
+    );
   }, []);
 
   // Build categories with counts
@@ -47,7 +48,10 @@ export default function HomePage() {
   const newRestaurants = mounted
     ? [...restaurants]
         .filter((r) => !r.isFeatured)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        )
         .slice(0, 4)
     : [];
 
@@ -67,7 +71,8 @@ export default function HomePage() {
             Find Halal Food You Can Trust
           </h1>
           <p className="text-lg lg:text-xl text-muted max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up-delay-1">
-            Discover certified halal restaurants across Canada — near you, right now.
+            Discover certified halal restaurants across Canada — near you, right
+            now.
           </p>
 
           <div className="opacity-0 animate-fade-up-delay-2">
@@ -110,13 +115,13 @@ export default function HomePage() {
                   className="group bg-surface border border-border rounded-2xl p-6 hover:border-zinc-700 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-1 transition-all duration-200 text-center"
                 >
                   <span className="text-3xl block mb-3">
-                    {categoryIcons[category] || '🍽️'}
+                    {categoryIcons[category] || "🍽️"}
                   </span>
                   <h3 className="font-semibold font-heading group-hover:text-primary transition-colors">
                     {category}
                   </h3>
                   <p className="text-sm text-muted mt-1">
-                    {count} restaurant{count > 1 ? 's' : ''}
+                    {count} restaurant{count > 1 ? "s" : ""}
                   </p>
                 </Link>
               ))}
@@ -131,7 +136,9 @@ export default function HomePage() {
           <h2 className="text-3xl lg:text-4xl font-bold font-heading tracking-tight mb-2">
             Newly Added
           </h2>
-          <p className="text-muted mb-8">Fresh halal restaurants just joined Munchhalal</p>
+          <p className="text-muted mb-8">
+            Fresh halal restaurants just joined Munchhalal
+          </p>
 
           {mounted && (
             <div className="space-y-4">

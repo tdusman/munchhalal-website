@@ -1,37 +1,41 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import Image from 'next/image';
-import Navbar from '@/components/layout/Navbar';
-import { getRestaurants } from '@/lib/storage';
-import { Restaurant } from '@/types';
-import StarRating from '@/components/restaurant/StarRating';
-import HalalBadge from '@/components/restaurant/HalalBadge';
-import { ArrowLeft, Search, List, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
+import Navbar from "@/components/layout/Navbar";
+import { getRestaurants } from "@/lib/storage";
+import { Restaurant } from "@/types";
+import StarRating from "@/components/restaurant/StarRating";
+import { ArrowLeft, Search, List, X } from "lucide-react";
 
-const RestaurantMap = dynamic(() => import('@/components/restaurant/RestaurantMap'), {
-  ssr: false,
-  loading: () => <div className="h-full bg-surface2 animate-pulse" />,
-});
+const RestaurantMap = dynamic(
+  () => import("@/components/restaurant/RestaurantMap"),
+  {
+    ssr: false,
+    loading: () => <div className="h-full bg-surface2 animate-pulse" />,
+  },
+);
 
 export default function MapPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [mounted, setMounted] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setMounted(true);
-    setRestaurants(getRestaurants().filter((r) => !r.isHidden && r.status === 'active'));
+    setRestaurants(
+      getRestaurants().filter((r) => !r.isHidden && r.status === "active"),
+    );
   }, []);
 
   const filtered = searchQuery
     ? restaurants.filter(
         (r) =>
           r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          r.city.toLowerCase().includes(searchQuery.toLowerCase())
+          r.city.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : restaurants;
 
@@ -42,7 +46,10 @@ export default function MapPage() {
       {/* Top bar */}
       <div className="pt-16 lg:pt-20 bg-surface border-b border-border">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-3 flex items-center gap-4">
-          <Link href="/restaurants" className="flex items-center gap-2 text-sm text-muted hover:text-text transition-colors">
+          <Link
+            href="/restaurants"
+            className="flex items-center gap-2 text-sm text-muted hover:text-text transition-colors"
+          >
             <ArrowLeft className="w-4 h-4" />
             <span className="hidden sm:inline">Back to List</span>
           </Link>
@@ -60,7 +67,11 @@ export default function MapPage() {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="lg:hidden p-2 text-muted hover:text-text transition-colors"
           >
-            {sidebarOpen ? <X className="w-5 h-5" /> : <List className="w-5 h-5" />}
+            {sidebarOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <List className="w-5 h-5" />
+            )}
           </button>
         </div>
       </div>
@@ -81,7 +92,9 @@ export default function MapPage() {
         {/* Sidebar */}
         <div
           className={`absolute lg:relative right-0 top-0 bottom-0 w-[320px] bg-surface border-l border-border overflow-y-auto transition-transform z-10 ${
-            sidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0 lg:hidden'
+            sidebarOpen
+              ? "translate-x-0"
+              : "translate-x-full lg:translate-x-0 lg:hidden"
           }`}
         >
           <div className="p-4">
@@ -108,9 +121,15 @@ export default function MapPage() {
                     <h4 className="text-sm font-semibold group-hover:text-primary transition-colors truncate">
                       {r.name}
                     </h4>
-                    <p className="text-xs text-muted truncate">{r.cuisineType} • {r.city}</p>
+                    <p className="text-xs text-muted truncate">
+                      {r.cuisineType} • {r.city}
+                    </p>
                     <div className="flex items-center gap-2 mt-1">
-                      <StarRating rating={r.avgRating} size="sm" showNumber={true} />
+                      <StarRating
+                        rating={r.avgRating}
+                        size="sm"
+                        showNumber={true}
+                      />
                     </div>
                   </div>
                 </Link>

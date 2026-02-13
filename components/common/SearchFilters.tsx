@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
-import { Restaurant } from '@/types';
-import { X } from 'lucide-react';
+import { X } from "lucide-react";
 
 interface SearchFiltersProps {
   searchQuery: string;
@@ -44,7 +43,7 @@ export default function SearchFilters({
     setSelectedCategories(
       selectedCategories.includes(cat)
         ? selectedCategories.filter((c) => c !== cat)
-        : [...selectedCategories, cat]
+        : [...selectedCategories, cat],
     );
   };
 
@@ -52,7 +51,7 @@ export default function SearchFilters({
     setPriceFilter(
       priceFilter.includes(price)
         ? priceFilter.filter((p) => p !== price)
-        : [...priceFilter, price]
+        : [...priceFilter, price],
     );
   };
 
@@ -60,7 +59,9 @@ export default function SearchFilters({
     <div className="space-y-6">
       {/* Search */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Search</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Search
+        </label>
         <input
           type="text"
           placeholder="Restaurant or cuisine..."
@@ -72,7 +73,9 @@ export default function SearchFilters({
 
       {/* City */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">City</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          City
+        </label>
         <input
           type="text"
           placeholder="Enter city..."
@@ -84,7 +87,9 @@ export default function SearchFilters({
 
       {/* Radius */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Radius</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Radius
+        </label>
         <select
           value={radius}
           onChange={(e) => setRadius(e.target.value)}
@@ -100,7 +105,9 @@ export default function SearchFilters({
 
       {/* Category */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Category</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Category
+        </label>
         <div className="space-y-2">
           {categories.map((cat) => (
             <label key={cat} className="flex items-center gap-2 cursor-pointer">
@@ -118,16 +125,18 @@ export default function SearchFilters({
 
       {/* Price */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Price Range</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Price Range
+        </label>
         <div className="flex gap-2">
-          {['$', '$$', '$$$', '$$$$'].map((p) => (
+          {["$", "$$", "$$$", "$$$$"].map((p) => (
             <button
               key={p}
               onClick={() => togglePrice(p)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-all ${
                 priceFilter.includes(p)
-                  ? 'bg-primary text-black border-primary'
-                  : 'bg-surface2 text-muted border-border hover:border-zinc-700'
+                  ? "bg-primary text-black border-primary"
+                  : "bg-surface2 text-muted border-border hover:border-zinc-700"
               }`}
             >
               {p}
@@ -138,7 +147,9 @@ export default function SearchFilters({
 
       {/* Halal Cert */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Halal Certification</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Halal Certification
+        </label>
         <select
           value={certFilter}
           onChange={(e) => setCertFilter(e.target.value)}
@@ -152,7 +163,9 @@ export default function SearchFilters({
 
       {/* Rating */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Minimum Rating</label>
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+          Minimum Rating
+        </label>
         <select
           value={ratingFilter}
           onChange={(e) => setRatingFilter(e.target.value)}
