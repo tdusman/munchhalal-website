@@ -1,24 +1,38 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Link from 'next/link';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import HalalBadge from '@/components/restaurant/HalalBadge';
-import StarRating from '@/components/restaurant/StarRating';
-import GalleryLightbox from '@/components/restaurant/GalleryLightbox';
-import AdSlot from '@/components/common/AdSlot';
-import { getRestaurantBySlug } from '@/lib/storage';
-import { Restaurant } from '@/types';
-import { MapPin, Phone, Globe, Instagram, Facebook, Twitter, Clock, ExternalLink } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import HalalBadge from "@/components/restaurant/HalalBadge";
+import StarRating from "@/components/restaurant/StarRating";
+import GalleryLightbox from "@/components/restaurant/GalleryLightbox";
+import AdSlot from "@/components/common/AdSlot";
+import { getRestaurantBySlug } from "@/lib/storage";
+import { Restaurant } from "@/types";
+import {
+  MapPin,
+  Phone,
+  Globe,
+  Instagram,
+  Facebook,
+  Twitter,
+  Clock,
+  ExternalLink,
+} from "lucide-react";
 
-const RestaurantMap = dynamic(() => import('@/components/restaurant/RestaurantMap'), {
-  ssr: false,
-  loading: () => <div className="h-[300px] bg-surface2 rounded-xl animate-pulse" />,
-});
+const RestaurantMap = dynamic(
+  () => import("@/components/restaurant/RestaurantMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[300px] bg-surface2 rounded-xl animate-pulse" />
+    ),
+  },
+);
 
 export default function RestaurantDetailPage() {
   const params = useParams();
@@ -49,8 +63,12 @@ export default function RestaurantDetailPage() {
         <Navbar />
         <div className="pt-32 text-center">
           <p className="text-4xl mb-4">🔍</p>
-          <h1 className="text-2xl font-bold font-heading mb-2">Restaurant Not Found</h1>
-          <p className="text-muted mb-6">The restaurant you&apos;re looking for doesn&apos;t exist.</p>
+          <h1 className="text-2xl font-bold font-heading mb-2">
+            Restaurant Not Found
+          </h1>
+          <p className="text-muted mb-6">
+            The restaurant you&apos;re looking for doesn&apos;t exist.
+          </p>
           <Link
             href="/restaurants"
             className="inline-flex px-6 py-3 bg-primary hover:bg-primary-dark text-black font-bold rounded-lg transition-all"
@@ -63,7 +81,7 @@ export default function RestaurantDetailPage() {
     );
   }
 
-  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${restaurant.lat},${restaurant.lng}`;
 
   return (
@@ -75,18 +93,18 @@ export default function RestaurantDetailPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Restaurant',
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
             name: restaurant.name,
             servesCuisine: restaurant.cuisineType,
             priceRange: restaurant.priceRange,
             address: {
-              '@type': 'PostalAddress',
+              "@type": "PostalAddress",
               streetAddress: restaurant.address,
               addressLocality: restaurant.city,
               addressRegion: restaurant.province,
               postalCode: restaurant.postalCode,
-              addressCountry: 'CA',
+              addressCountry: "CA",
             },
             telephone: restaurant.phone,
             url: restaurant.website,
@@ -109,7 +127,7 @@ export default function RestaurantDetailPage() {
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 max-w-[1280px] mx-auto">
           <div className="flex items-center gap-3 mb-3">
             {restaurant.isFeatured && (
-              <span className="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-semibold px-3 py-1 rounded-full">
+              <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-semibold px-3 py-1 rounded-full">
                 ⭐ Featured
               </span>
             )}
@@ -131,20 +149,31 @@ export default function RestaurantDetailPage() {
           <div className="flex-1 min-w-0 space-y-8">
             {/* Quick Info */}
             <div className="flex items-center gap-4 flex-wrap">
-              <StarRating rating={restaurant.avgRating} totalReviews={restaurant.totalReviews} size="md" />
-              <span className="text-lg font-semibold text-muted">{restaurant.priceRange}</span>
+              <StarRating
+                rating={restaurant.avgRating}
+                totalReviews={restaurant.totalReviews}
+                size="md"
+              />
+              <span className="text-lg font-semibold text-muted">
+                {restaurant.priceRange}
+              </span>
             </div>
 
             {/* Description */}
             <div>
               <h2 className="text-xl font-bold font-heading mb-3">About</h2>
-              <p className="text-muted leading-relaxed">{restaurant.description}</p>
+              <p className="text-muted leading-relaxed">
+                {restaurant.description}
+              </p>
             </div>
 
             {/* Gallery */}
             <div>
               <h2 className="text-xl font-bold font-heading mb-4">Photos</h2>
-              <GalleryLightbox images={restaurant.images} restaurantName={restaurant.name} />
+              <GalleryLightbox
+                images={restaurant.images}
+                restaurantName={restaurant.name}
+              />
             </div>
 
             {/* Opening Hours */}
@@ -158,14 +187,20 @@ export default function RestaurantDetailPage() {
                   <div
                     key={day}
                     className={`flex items-center justify-between px-4 py-3 border-b border-border last:border-0 ${
-                      day === today ? 'bg-primary/5 border-l-2 border-l-primary' : ''
+                      day === today
+                        ? "bg-primary/5 border-l-2 border-l-primary"
+                        : ""
                     }`}
                   >
-                    <span className={`text-sm font-medium ${day === today ? 'text-primary' : 'text-text'}`}>
-                      {day} {day === today && '(Today)'}
+                    <span
+                      className={`text-sm font-medium ${day === today ? "text-primary" : "text-text"}`}
+                    >
+                      {day} {day === today && "(Today)"}
                     </span>
                     <span className="text-sm text-muted">
-                      {hours.closed ? 'Closed' : `${hours.open} – ${hours.close}`}
+                      {hours.closed
+                        ? "Closed"
+                        : `${hours.open} – ${hours.close}`}
                     </span>
                   </div>
                 ))}
@@ -197,18 +232,24 @@ export default function RestaurantDetailPage() {
           <aside className="lg:w-[340px] flex-shrink-0 space-y-6">
             {/* Contact Card */}
             <div className="bg-surface border border-border rounded-2xl p-6 space-y-4 sticky top-24">
-              <h3 className="text-lg font-semibold font-heading">Contact Info</h3>
+              <h3 className="text-lg font-semibold font-heading">
+                Contact Info
+              </h3>
 
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-muted">
-                  {restaurant.address}, {restaurant.city}, {restaurant.province} {restaurant.postalCode}
+                  {restaurant.address}, {restaurant.city}, {restaurant.province}{" "}
+                  {restaurant.postalCode}
                 </span>
               </div>
 
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href={`tel:${restaurant.phone}`} className="text-sm text-muted hover:text-text transition-colors">
+                <a
+                  href={`tel:${restaurant.phone}`}
+                  className="text-sm text-muted hover:text-text transition-colors"
+                >
                   {restaurant.phone}
                 </a>
               </div>
@@ -222,7 +263,7 @@ export default function RestaurantDetailPage() {
                     rel="noopener noreferrer"
                     className="text-sm text-muted hover:text-text transition-colors truncate"
                   >
-                    {restaurant.website.replace(/^https?:\/\//, '')}
+                    {restaurant.website.replace(/^https?:\/\//, "")}
                   </a>
                 </div>
               )}
@@ -230,20 +271,32 @@ export default function RestaurantDetailPage() {
               {/* Social Links */}
               <div className="flex items-center gap-3 pt-2">
                 {restaurant.socialLinks.instagram && (
-                  <a href={restaurant.socialLinks.instagram} target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
+                  <a
+                    href={restaurant.socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
                     <Instagram className="w-4 h-4" />
                   </a>
                 )}
                 {restaurant.socialLinks.facebook && (
-                  <a href={restaurant.socialLinks.facebook} target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
+                  <a
+                    href={restaurant.socialLinks.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
                     <Facebook className="w-4 h-4" />
                   </a>
                 )}
                 {restaurant.socialLinks.twitter && (
-                  <a href={restaurant.socialLinks.twitter} target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
+                  <a
+                    href={restaurant.socialLinks.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
                     <Twitter className="w-4 h-4" />
                   </a>
                 )}
@@ -252,7 +305,9 @@ export default function RestaurantDetailPage() {
 
             {/* Claim CTA */}
             <div className="bg-surface border border-border rounded-2xl p-6 text-center">
-              <p className="text-sm text-muted mb-3">Is this your restaurant?</p>
+              <p className="text-sm text-muted mb-3">
+                Is this your restaurant?
+              </p>
               <Link
                 href="/contact?subject=Restaurant+Owner"
                 className="inline-flex items-center px-5 py-2.5 bg-transparent border border-primary/50 hover:border-primary text-primary font-semibold text-sm rounded-lg transition-all"

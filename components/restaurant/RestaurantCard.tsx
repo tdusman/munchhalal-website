@@ -1,17 +1,20 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Restaurant } from '@/types';
-import HalalBadge from './HalalBadge';
-import StarRating from './StarRating';
-import { MapPin, Phone } from 'lucide-react';
+import Link from "next/link";
+import Image from "next/image";
+import { Restaurant } from "@/types";
+import HalalBadge from "./HalalBadge";
+import StarRating from "./StarRating";
+import { MapPin, Phone } from "lucide-react";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
-  variant?: 'horizontal' | 'vertical';
+  variant?: "horizontal" | "vertical";
 }
 
-export default function RestaurantCard({ restaurant, variant = 'vertical' }: RestaurantCardProps) {
-  if (variant === 'horizontal') {
+export default function RestaurantCard({
+  restaurant,
+  variant = "vertical",
+}: RestaurantCardProps) {
+  if (variant === "horizontal") {
     return (
       <Link href={`/restaurants/${restaurant.slug}`} className="block group">
         <div className="flex flex-col sm:flex-row bg-surface border border-border rounded-2xl overflow-hidden hover:border-zinc-700 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5 transition-all duration-200">
@@ -25,7 +28,7 @@ export default function RestaurantCard({ restaurant, variant = 'vertical' }: Res
               sizes="(max-width: 640px) 100vw, 240px"
             />
             {restaurant.isFeatured && (
-              <span className="absolute top-3 left-3 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-semibold px-2.5 py-1 rounded-full">
+              <span className="absolute top-3 left-3 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-semibold px-2.5 py-1 rounded-full">
                 ⭐ Featured
               </span>
             )}
@@ -36,13 +39,22 @@ export default function RestaurantCard({ restaurant, variant = 'vertical' }: Res
               <h3 className="text-lg font-semibold font-heading group-hover:text-primary transition-colors">
                 {restaurant.name}
               </h3>
-              <span className="text-sm font-semibold text-muted flex-shrink-0">{restaurant.priceRange}</span>
+              <span className="text-sm font-semibold text-muted flex-shrink-0">
+                {restaurant.priceRange}
+              </span>
             </div>
-            <p className="text-sm text-muted">{restaurant.cuisineType} • {restaurant.category}</p>
-            <StarRating rating={restaurant.avgRating} totalReviews={restaurant.totalReviews} />
+            <p className="text-sm text-muted">
+              {restaurant.cuisineType} • {restaurant.category}
+            </p>
+            <StarRating
+              rating={restaurant.avgRating}
+              totalReviews={restaurant.totalReviews}
+            />
             <div className="flex items-center gap-1.5 text-sm text-muted">
               <MapPin className="w-3.5 h-3.5" />
-              <span>{restaurant.address}, {restaurant.city}</span>
+              <span>
+                {restaurant.address}, {restaurant.city}
+              </span>
             </div>
             <div className="flex items-center gap-1.5 text-sm text-muted">
               <Phone className="w-3.5 h-3.5" />
@@ -72,7 +84,7 @@ export default function RestaurantCard({ restaurant, variant = 'vertical' }: Res
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {restaurant.isFeatured && (
-            <span className="absolute top-3 left-3 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">
+            <span className="absolute top-3 left-3 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">
               ⭐ Featured
             </span>
           )}
@@ -81,10 +93,14 @@ export default function RestaurantCard({ restaurant, variant = 'vertical' }: Res
           <h3 className="text-lg font-semibold font-heading group-hover:text-primary transition-colors line-clamp-1">
             {restaurant.name}
           </h3>
-          <p className="text-sm text-muted">{restaurant.cuisineType} • {restaurant.city}</p>
+          <p className="text-sm text-muted">
+            {restaurant.cuisineType} • {restaurant.city}
+          </p>
           <div className="flex items-center justify-between">
             <StarRating rating={restaurant.avgRating} />
-            <span className="text-sm font-semibold text-muted">{restaurant.priceRange}</span>
+            <span className="text-sm font-semibold text-muted">
+              {restaurant.priceRange}
+            </span>
           </div>
           <HalalBadge type={restaurant.halalCertType} />
           <span className="block text-sm font-semibold text-primary group-hover:underline underline-offset-4 pt-1">

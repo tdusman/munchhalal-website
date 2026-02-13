@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #f97316;
-  --color-primary-dark: #ea6c0a;
+  --color-primary: #5a9eeb;
+  --color-primary-dark: #4889d4;
   --color-bg: #09090b;
   --color-surface: #111113;
   --color-surface2: #18181b;
@@ -14,7 +14,7 @@
   --color-text: #fafafa;
   --color-muted: #a1a1aa;
   --color-green: #22c55e;
-  --color-gold: #f59e0b;
+  --color-gold: #7b8fea;
 }
 
 * {

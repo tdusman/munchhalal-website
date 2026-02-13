@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { Restaurant } from '@/types';
-import Link from 'next/link';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { Restaurant } from "@/types";
+import Link from "next/link";
 
 // Fix default icon issue with webpack
 const defaultIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -18,8 +19,9 @@ const defaultIcon = L.icon({
 });
 
 const featuredIcon = L.icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -37,7 +39,7 @@ export default function RestaurantMap({
   restaurants,
   center = [43.6532, -79.3832],
   zoom = 11,
-  className = 'h-[400px] w-full rounded-xl',
+  className = "h-[400px] w-full rounded-xl",
 }: RestaurantMapProps) {
   return (
     <MapContainer
@@ -59,7 +61,9 @@ export default function RestaurantMap({
           <Popup>
             <div className="min-w-[180px]">
               <h3 className="font-semibold text-sm mb-1">{r.name}</h3>
-              <p className="text-xs text-muted mb-1">{r.cuisineType} • ⭐ {r.avgRating.toFixed(1)}</p>
+              <p className="text-xs text-muted mb-1">
+                {r.cuisineType} • ⭐ {r.avgRating.toFixed(1)}
+              </p>
               <Link
                 href={`/restaurants/${r.slug}`}
                 className="text-xs font-semibold text-primary hover:underline"

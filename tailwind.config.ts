@@ -10,8 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#F97316",
-          dark: "#EA6C0A",
+          DEFAULT: "#5A9EEB",
+          dark: "#4889D4",
         },
         bg: "#09090B",
         surface: "#111113",
@@ -20,7 +20,7 @@ const config: Config = {
         text: "#FAFAFA",
         muted: "#A1A1AA",
         green: "#22C55E",
-        gold: "#F59E0B",
+        gold: "#7B8FEA",
       },
       fontFamily: {
         heading: ["Anek Bangla", "sans-serif"],
