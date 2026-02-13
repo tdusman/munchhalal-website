@@ -8,7 +8,7 @@ import MobileMenu from "./MobileMenu";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/restaurants", label: "Restaurants" },
+  { href: "/restaurants", label: "Explore Restaurants" },
   { href: "/map", label: "Map" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
