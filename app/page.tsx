@@ -10,7 +10,6 @@ import CategoryPills from "@/components/home/CategoryPills";
 import FeaturedSection from "@/components/home/FeaturedSection";
 import AdBanner from "@/components/home/AdBanner";
 import NewsletterSignup from "@/components/home/NewsletterSignup";
-import StarRating from "@/components/restaurant/StarRating";
 import { getRestaurants } from "@/lib/storage";
 import { Restaurant } from "@/types";
 
@@ -164,7 +163,6 @@ export default function HomePage() {
                     <p className="text-sm text-muted truncate">
                       {r.cuisineType} • {r.city}
                     </p>
-                    <StarRating rating={r.avgRating} size="sm" />
                   </div>
                 </Link>
               ))}

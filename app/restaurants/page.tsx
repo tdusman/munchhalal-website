@@ -42,7 +42,6 @@ function RestaurantsContent() {
   );
   const [priceFilter, setPriceFilter] = useState<string[]>([]);
   const [certFilter, setCertFilter] = useState("");
-  const [ratingFilter, setRatingFilter] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -100,19 +99,11 @@ function RestaurantsContent() {
       results = results.filter((r) => r.halalCertType === certFilter);
     }
 
-    if (ratingFilter) {
-      const minRating = parseFloat(ratingFilter);
-      results = results.filter((r) => r.avgRating >= minRating);
-    }
-
     // Sort
     const featured = results.filter((r) => r.isFeatured);
     const nonFeatured = results.filter((r) => !r.isFeatured);
 
     switch (sortBy) {
-      case "rating":
-        nonFeatured.sort((a, b) => b.avgRating - a.avgRating);
-        break;
       case "newest":
         nonFeatured.sort(
           (a, b) =>
@@ -133,7 +124,6 @@ function RestaurantsContent() {
     selectedCategories,
     priceFilter,
     certFilter,
-    ratingFilter,
     sortBy,
   ]);
 
@@ -144,7 +134,6 @@ function RestaurantsContent() {
     setSelectedCategories([]);
     setPriceFilter([]);
     setCertFilter("");
-    setRatingFilter("");
   };
 
   return (
@@ -189,8 +178,6 @@ function RestaurantsContent() {
                 setPriceFilter={setPriceFilter}
                 certFilter={certFilter}
                 setCertFilter={setCertFilter}
-                ratingFilter={ratingFilter}
-                setRatingFilter={setRatingFilter}
                 categories={categories}
                 onClearAll={clearAll}
               />
@@ -220,7 +207,6 @@ function RestaurantsContent() {
                   className="bg-surface2 border border-border text-text rounded-lg px-3 py-1.5 text-sm outline-none"
                 >
                   <option value="featured">Featured First</option>
-                  <option value="rating">Rating (High-Low)</option>
                   <option value="newest">Newest</option>
                 </select>
                 <ViewToggle view={view} onViewChange={setView} />

@@ -20,7 +20,6 @@ const config: Config = {
         text: "#FAFAFA",
         muted: "#A1A1AA",
         green: "#22C55E",
-        gold: "#7B8FEA",
       },
       fontFamily: {
         heading: ["Anek Bangla", "sans-serif"],

@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Restaurant } from "@/types";
 import HalalBadge from "./HalalBadge";
-import StarRating from "./StarRating";
 import { MapPin, Phone } from "lucide-react";
 
 interface RestaurantCardProps {
@@ -46,10 +45,6 @@ export default function RestaurantCard({
             <p className="text-sm text-muted">
               {restaurant.cuisineType} • {restaurant.category}
             </p>
-            <StarRating
-              rating={restaurant.avgRating}
-              totalReviews={restaurant.totalReviews}
-            />
             <div className="flex items-center gap-1.5 text-sm text-muted">
               <MapPin className="w-3.5 h-3.5" />
               <span>
@@ -97,7 +92,6 @@ export default function RestaurantCard({
             {restaurant.cuisineType} • {restaurant.city}
           </p>
           <div className="flex items-center justify-between">
-            <StarRating rating={restaurant.avgRating} />
             <span className="text-sm font-semibold text-muted">
               {restaurant.priceRange}
             </span>

@@ -15,8 +15,6 @@ interface SearchFiltersProps {
   setPriceFilter: (v: string[]) => void;
   certFilter: string;
   setCertFilter: (v: string) => void;
-  ratingFilter: string;
-  setRatingFilter: (v: string) => void;
   categories: string[];
   onClearAll: () => void;
 }
@@ -34,8 +32,6 @@ export default function SearchFilters({
   setPriceFilter,
   certFilter,
   setCertFilter,
-  ratingFilter,
-  setRatingFilter,
   categories,
   onClearAll,
 }: SearchFiltersProps) {
@@ -158,23 +154,6 @@ export default function SearchFilters({
           <option value="">All</option>
           <option value="certified">Certified</option>
           <option value="self_declared">Self Declared</option>
-        </select>
-      </div>
-
-      {/* Rating */}
-      <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
-          Minimum Rating
-        </label>
-        <select
-          value={ratingFilter}
-          onChange={(e) => setRatingFilter(e.target.value)}
-          className="w-full bg-surface2 border border-border focus:border-primary text-text rounded-lg px-4 py-2.5 outline-none text-sm transition-all"
-        >
-          <option value="">Any</option>
-          <option value="3.5">3.5+</option>
-          <option value="4.0">4.0+</option>
-          <option value="4.5">4.5+</option>
         </select>
       </div>
 

@@ -20,15 +20,13 @@ export interface Restaurant {
   };
   images: string[];
   coverImage: string;
-  priceRange: '$' | '$$' | '$$$' | '$$$$';
-  halalCertType: 'certified' | 'self_declared' | 'unknown';
+  priceRange: "$" | "$$" | "$$$" | "$$$$";
+  halalCertType: "certified" | "self_declared" | "unknown";
   isFeatured: boolean;
   isPromoted: boolean;
   isHidden: boolean;
-  avgRating: number;
-  totalReviews: number;
-  status: 'active' | 'pending' | 'disabled';
-  planType: 'free' | 'basic' | 'featured';
+  status: "active" | "pending" | "disabled";
+  planType: "free" | "basic" | "featured";
   openingHours: {
     [day: string]: { open: string; close: string; closed: boolean };
   };
@@ -40,8 +38,8 @@ export interface Ad {
   title: string;
   imageUrl: string;
   destinationUrl: string;
-  placement: 'homepage_banner' | 'sidebar' | 'listing_page' | 'search_top';
-  status: 'active' | 'paused' | 'expired';
+  placement: "homepage_banner" | "sidebar" | "listing_page" | "search_top";
+  status: "active" | "paused" | "expired";
   startsAt: string;
   endsAt: string;
 }

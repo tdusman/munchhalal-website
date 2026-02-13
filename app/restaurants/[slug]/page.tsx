@@ -8,7 +8,6 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HalalBadge from "@/components/restaurant/HalalBadge";
-import StarRating from "@/components/restaurant/StarRating";
 import GalleryLightbox from "@/components/restaurant/GalleryLightbox";
 import AdSlot from "@/components/common/AdSlot";
 import { getRestaurantBySlug } from "@/lib/storage";
@@ -149,11 +148,6 @@ export default function RestaurantDetailPage() {
           <div className="flex-1 min-w-0 space-y-8">
             {/* Quick Info */}
             <div className="flex items-center gap-4 flex-wrap">
-              <StarRating
-                rating={restaurant.avgRating}
-                totalReviews={restaurant.totalReviews}
-                size="md"
-              />
               <span className="text-lg font-semibold text-muted">
                 {restaurant.priceRange}
               </span>
