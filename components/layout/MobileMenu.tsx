@@ -27,17 +27,14 @@ export default function MobileMenu({
       {/* Drawer */}
       <div className="absolute right-0 top-0 bottom-0 w-[300px] bg-surface border-l border-border animate-slide-in-right">
         <div className="flex items-center justify-between p-6 border-b border-border">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <Image
               src="https://cdn.prod.website-files.com/645fd27cc7fb9e94b1de9389/656bdb4bf280747c28f41b3a_mh-logo-cropped-png.png"
               alt="Munchhalal Logo"
-              width={28}
-              height={28}
+              width={40}
+              height={40}
               className="object-contain"
             />
-            <span className="text-lg font-bold font-heading text-primary">
-              Munchhalal
-            </span>
           </div>
           <button
             onClick={onClose}

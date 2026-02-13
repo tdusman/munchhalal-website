@@ -9,17 +9,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center mb-4">
               <Image
                 src="https://cdn.prod.website-files.com/645fd27cc7fb9e94b1de9389/656bdb4bf280747c28f41b3a_mh-logo-cropped-png.png"
                 alt="Munchhalal Logo"
-                width={32}
-                height={32}
+                width={48}
+                height={48}
                 className="object-contain"
               />
-              <span className="text-xl font-bold font-heading text-primary">
-                Munchhalal
-              </span>
             </Link>
             <p className="text-sm text-muted leading-relaxed">
               Discover certified halal restaurants across Canada. Your trusted

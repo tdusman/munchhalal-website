@@ -36,17 +36,14 @@ export default function Navbar() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center group">
               <Image
                 src="https://cdn.prod.website-files.com/645fd27cc7fb9e94b1de9389/656bdb4bf280747c28f41b3a_mh-logo-cropped-png.png"
                 alt="Munchhalal Logo"
-                width={40}
-                height={40}
+                width={56}
+                height={56}
                 className="object-contain"
               />
-              <span className="text-xl font-bold font-heading text-primary group-hover:text-primary-dark transition-colors">
-                Munchhalal
-              </span>
             </Link>
 
             {/* Desktop Nav */}

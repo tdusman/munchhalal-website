@@ -9,8 +9,8 @@ export default function NotFound() {
           <Image
             src="https://cdn.prod.website-files.com/645fd27cc7fb9e94b1de9389/656bdb4bf280747c28f41b3a_mh-logo-cropped-png.png"
             alt="Munchhalal Logo"
-            width={80}
-            height={80}
+            width={100}
+            height={100}
             className="object-contain"
           />
         </div>
