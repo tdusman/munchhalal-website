@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100;200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-primary: #F97316;
-  --color-primary-dark: #EA6C0A;
-  --color-bg: #09090B;
+  --color-primary: #f97316;
+  --color-primary-dark: #ea6c0a;
+  --color-bg: #09090b;
   --color-surface: #111113;
-  --color-surface2: #18181B;
-  --color-border: #27272A;
-  --color-text: #FAFAFA;
-  --color-muted: #A1A1AA;
-  --color-green: #22C55E;
-  --color-gold: #F59E0B;
+  --color-surface2: #18181b;
+  --color-border: #27272a;
+  --color-text: #fafafa;
+  --color-muted: #a1a1aa;
+  --color-green: #22c55e;
+  --color-gold: #f59e0b;
 }
 
 * {
@@ -28,7 +28,7 @@ html {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.7;
@@ -37,8 +37,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Syne', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Anek Bangla", sans-serif;
 }
 
 /* Scrollbar */
@@ -68,13 +73,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Leaflet overrides */
 .leaflet-container {
   background: var(--color-surface) !important;
-  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 .leaflet-popup-content-wrapper {
   background: var(--color-surface2) !important;
   color: var(--color-text) !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
 }
 .leaflet-popup-tip {
   background: var(--color-surface2) !important;
