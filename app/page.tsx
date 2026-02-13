@@ -70,7 +70,7 @@ export default function HomePage() {
           <h1 className="text-[38px] lg:text-[64px] font-extrabold font-heading tracking-[-2px] leading-tight mb-4 opacity-0 animate-fade-up">
             Find Halal Food You Can Trust
           </h1>
-          <p className="text-lg lg:text-xl text-muted max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up-delay-1">
+          <p className="text-lg lg:text-xl text-muted max-w-3xl mx-auto mb-10 opacity-0 animate-fade-up-delay-1">
             Discover certified halal restaurants across Canada — near you, right
             now.
           </p>
