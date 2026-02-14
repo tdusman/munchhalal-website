@@ -7,7 +7,6 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import { getRestaurants } from "@/lib/storage";
 import { Restaurant } from "@/types";
-import StarRating from "@/components/restaurant/StarRating";
 import { ArrowLeft, Search, List, X } from "lucide-react";
 
 const RestaurantMap = dynamic(
@@ -124,13 +123,6 @@ export default function MapPage() {
                     <p className="text-xs text-muted truncate">
                       {r.cuisineType} • {r.city}
                     </p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <StarRating
-                        rating={r.avgRating}
-                        size="sm"
-                        showNumber={true}
-                      />
-                    </div>
                   </div>
                 </Link>
               ))}
