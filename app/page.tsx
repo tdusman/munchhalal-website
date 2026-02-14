@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSearch from "@/components/home/HeroSearch";
@@ -10,6 +9,8 @@ import CategoryPills from "@/components/home/CategoryPills";
 import FeaturedSection from "@/components/home/FeaturedSection";
 import AdBanner from "@/components/home/AdBanner";
 import NewsletterSignup from "@/components/home/NewsletterSignup";
+import RestaurantCard from "@/components/restaurant/RestaurantCard";
+import RestaurantCardSkeleton from "@/components/restaurant/RestaurantCardSkeleton";
 import { getRestaurants } from "@/lib/storage";
 import { Restaurant } from "@/types";
 
@@ -139,32 +140,18 @@ export default function HomePage() {
             Fresh halal restaurants just joined Munchhalal
           </p>
 
-          {mounted && (
-            <div className="space-y-4">
+          {!mounted ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <RestaurantCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0">
               {newRestaurants.map((r) => (
-                <Link
-                  key={r.id}
-                  href={`/restaurants/${r.slug}`}
-                  className="flex items-center gap-4 bg-surface border border-border rounded-xl p-3 hover:border-zinc-700 hover:shadow-lg hover:shadow-black/30 transition-all group"
-                >
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0">
-                    <Image
-                      src={r.coverImage}
-                      alt={r.name}
-                      fill
-                      className="object-cover"
-                      sizes="80px"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold font-heading group-hover:text-primary transition-colors truncate">
-                      {r.name}
-                    </h3>
-                    <p className="text-sm text-muted truncate">
-                      {r.cuisineType} • {r.city}
-                    </p>
-                  </div>
-                </Link>
+                <div key={r.id} className="min-w-[300px] lg:min-w-0">
+                  <RestaurantCard restaurant={r} />
+                </div>
               ))}
             </div>
           )}
