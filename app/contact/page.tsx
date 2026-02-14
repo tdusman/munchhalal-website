@@ -1,39 +1,47 @@
-'use client';
+"use client";
 
-import { useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import { addContact } from '@/lib/storage';
-import { generateId } from '@/lib/utils';
-import { Mail, Clock, Send, CheckCircle, Instagram, Facebook, Twitter } from 'lucide-react';
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { addContact } from "@/lib/storage";
+import { generateId } from "@/lib/utils";
+import { Mail, Clock, Send, CheckCircle } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faFacebookF,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 function ContactContent() {
   const searchParams = useSearchParams();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState(searchParams.get('subject') || 'General Inquiry');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState(
+    searchParams.get("subject") || "General Inquiry",
+  );
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setError('Please fill in all required fields.');
+      setError("Please fill in all required fields.");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address.');
+      setError("Please enter a valid email address.");
       return;
     }
 
     if (message.trim().length < 20) {
-      setError('Message must be at least 20 characters.');
+      setError("Message must be at least 20 characters.");
       return;
     }
 
@@ -47,10 +55,10 @@ function ContactContent() {
     });
 
     setSubmitted(true);
-    setName('');
-    setEmail('');
-    setSubject('General Inquiry');
-    setMessage('');
+    setName("");
+    setEmail("");
+    setSubject("General Inquiry");
+    setMessage("");
   };
 
   return (
@@ -73,9 +81,12 @@ function ContactContent() {
             {submitted ? (
               <div className="bg-surface border border-green/30 rounded-2xl p-8 text-center">
                 <CheckCircle className="w-12 h-12 text-green mx-auto mb-4" />
-                <h3 className="text-xl font-bold font-heading mb-2">Message Sent!</h3>
+                <h3 className="text-xl font-bold font-heading mb-2">
+                  Message Sent!
+                </h3>
                 <p className="text-muted mb-6">
-                  Thank you for reaching out. We&apos;ll get back to you within 24-48 hours.
+                  Thank you for reaching out. We&apos;ll get back to you within
+                  24-48 hours.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -85,9 +96,14 @@ function ContactContent() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-surface border border-border rounded-2xl p-6 sm:p-8 space-y-5">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-surface border border-border rounded-2xl p-6 sm:p-8 space-y-5"
+              >
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Name *</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+                    Name *
+                  </label>
                   <input
                     type="text"
                     value={name}
@@ -97,7 +113,9 @@ function ContactContent() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Email *</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+                    Email *
+                  </label>
                   <input
                     type="email"
                     value={email}
@@ -107,7 +125,9 @@ function ContactContent() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Subject</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+                    Subject
+                  </label>
                   <select
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
@@ -121,7 +141,9 @@ function ContactContent() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">Message *</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted mb-2 block">
+                    Message *
+                  </label>
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -130,7 +152,9 @@ function ContactContent() {
                     placeholder="Tell us how we can help (min. 20 characters)"
                   />
                 </div>
-                {error && <p className="text-sm font-semibold text-red-400">{error}</p>}
+                {error && (
+                  <p className="text-sm font-semibold text-red-400">{error}</p>
+                )}
                 <button
                   type="submit"
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary-dark text-black font-bold rounded-lg transition-all btn-press"
@@ -151,7 +175,10 @@ function ContactContent() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm mb-1">Email Us</h3>
-                  <a href="mailto:hello@munchhalal.ca" className="text-sm text-primary hover:underline">
+                  <a
+                    href="mailto:hello@munchhalal.ca"
+                    className="text-sm text-primary hover:underline"
+                  >
                     hello@munchhalal.ca
                   </a>
                 </div>
@@ -170,25 +197,42 @@ function ContactContent() {
               <div className="border-t border-border pt-6">
                 <h3 className="font-semibold text-sm mb-3">Follow Us</h3>
                 <div className="flex items-center gap-3">
-                  <a href="https://instagram.com/munchhalal" target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
-                    <Instagram className="w-5 h-5" />
+                  <a
+                    href="https://instagram.com/munchhalal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
                   </a>
-                  <a href="https://facebook.com/munchhalal" target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
-                    <Facebook className="w-5 h-5" />
+                  <a
+                    href="https://facebook.com/munchhalal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
+                    <FontAwesomeIcon icon={faFacebookF} className="w-5 h-5" />
                   </a>
-                  <a href="https://twitter.com/munchhalal" target="_blank" rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all">
-                    <Twitter className="w-5 h-5" />
+                  <a
+                    href="https://x.com/munchhalal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
+                  >
+                    <FontAwesomeIcon icon={faXTwitter} className="w-5 h-5" />
                   </a>
                 </div>
               </div>
             </div>
 
             <div className="bg-surface border border-border rounded-2xl p-6 sm:p-8 text-center">
-              <p className="text-sm text-muted mb-2">Looking for restaurant info?</p>
-              <a href="/faq" className="text-sm font-semibold text-primary hover:underline">
+              <p className="text-sm text-muted mb-2">
+                Looking for restaurant info?
+              </p>
+              <a
+                href="/faq"
+                className="text-sm font-semibold text-primary hover:underline"
+              >
                 Visit our FAQ →
               </a>
             </div>

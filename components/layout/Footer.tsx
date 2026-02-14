@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faFacebookF,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
@@ -102,7 +107,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary hover:bg-surface2/80 transition-all"
               >
-                <Instagram className="w-5 h-5" />
+                <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
               </a>
               <a
                 href="https://facebook.com/munchhalal"
@@ -110,15 +115,15 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary hover:bg-surface2/80 transition-all"
               >
-                <Facebook className="w-5 h-5" />
+                <FontAwesomeIcon icon={faFacebookF} className="w-5 h-5" />
               </a>
               <a
-                href="https://twitter.com/munchhalal"
+                href="https://x.com/munchhalal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary hover:bg-surface2/80 transition-all"
               >
-                <Twitter className="w-5 h-5" />
+                <FontAwesomeIcon icon={faXTwitter} className="w-5 h-5" />
               </a>
             </div>
           </div>

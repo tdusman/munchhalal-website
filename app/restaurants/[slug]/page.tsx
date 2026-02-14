@@ -12,16 +12,13 @@ import GalleryLightbox from "@/components/restaurant/GalleryLightbox";
 import AdSlot from "@/components/common/AdSlot";
 import { getRestaurantBySlug } from "@/lib/storage";
 import { Restaurant } from "@/types";
+import { MapPin, Phone, Globe, Clock, ExternalLink } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  MapPin,
-  Phone,
-  Globe,
-  Instagram,
-  Facebook,
-  Twitter,
-  Clock,
-  ExternalLink,
-} from "lucide-react";
+  faInstagram,
+  faFacebookF,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 const RestaurantMap = dynamic(
   () => import("@/components/restaurant/RestaurantMap"),
@@ -271,7 +268,7 @@ export default function RestaurantDetailPage() {
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
                   >
-                    <Instagram className="w-4 h-4" />
+                    <FontAwesomeIcon icon={faInstagram} className="w-4 h-4" />
                   </a>
                 )}
                 {restaurant.socialLinks.facebook && (
@@ -281,7 +278,7 @@ export default function RestaurantDetailPage() {
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
                   >
-                    <Facebook className="w-4 h-4" />
+                    <FontAwesomeIcon icon={faFacebookF} className="w-4 h-4" />
                   </a>
                 )}
                 {restaurant.socialLinks.twitter && (
@@ -291,7 +288,7 @@ export default function RestaurantDetailPage() {
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-surface2 text-muted hover:text-primary transition-all"
                   >
-                    <Twitter className="w-4 h-4" />
+                    <FontAwesomeIcon icon={faXTwitter} className="w-4 h-4" />
                   </a>
                 )}
               </div>
